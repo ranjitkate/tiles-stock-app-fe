@@ -1,0 +1,46 @@
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 220px;
+  background-color: #263238;
+  color: white;
+  height: 100vh;
+  padding-top: 1rem;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.app-sidebar.open {
+  left: 0;
+}
+
+.app-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.app-sidebar li {
+  padding: 0.8rem 1.2rem;
+}
+
+.app-sidebar a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.app-sidebar a:hover {
+  background-color: #455a64;
+}
+
+@media (min-width: 769px) {
+  .app-sidebar {
+    left: 0;
+    position: relative;
+  }
+  .app-sidebar.open {
+    left: 0;
+  }
+}

@@ -1,0 +1,35 @@
+<div class="categories-container">
+  <h2>Add Category</h2>
+  <form (ngSubmit)="addCategory()" class="category-form">
+    <input type="text" placeholder="Category Name" [(ngModel)]="newCategory.name" name="name" required />
+    <input type="text" placeholder="Description" [(ngModel)]="newCategory.description" name="description" />
+    <select [(ngModel)]="newCategory.status" name="status">
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
+    <button type="submit">Add Category</button>
+  </form>
+
+  <h3>All Categories</h3>
+  <table class="category-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories; let i = index">
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+        <td>{{ category.status }}</td>
+        <td>
+          <button (click)="editCategory(i)">Edit</button>
+          <button (click)="deleteCategory(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

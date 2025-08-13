@@ -1,0 +1,50 @@
+<div class="login-container">
+  <mat-card class="login-card animated-slide-in">
+    <h2 class="title">Login</h2>
+
+    <form [formGroup]="loginForm"  *ngIf="!showForgotPassword" (ngSubmit)="login()" class="login-form">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>📧</mat-icon>
+        <input matInput type="email" formControlName="email">
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Enter a valid email</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix>🔒</mat-icon>
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" class="submit-btn">Login</button>
+
+      <div *ngIf="errorMessage" class="error-message animate__animated animate__fadeInDown">
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="extra-links" *ngIf="!showForgotPassword">
+      <a (click)="toggleForgotPassword()" class="link hover-bounce">Forgot password?</a>
+      <br>
+      <span>Don't have an account? <a routerLink="/register" class="link hover-bounce">Register here</a></span>
+    </div>
+
+    <div *ngIf="showForgotPassword" class="forgot-password-form">
+      <form [formGroup]="loginForm"   class="login-form">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Registered Email</mat-label>
+        <mat-icon matPrefix>📨</mat-icon>
+        <input matInput type="email" formControlName="forgotEmail">
+        <mat-error *ngIf="loginForm.get('forgotEmail')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="loginForm.get('forgotEmail')?.hasError('email')">Enter a valid email</mat-error>
+      </mat-form-field>
+      <button mat-stroked-button color="accent" (click)="sendResetLink()">Send Reset Link</button>
+      <div *ngIf="resetMessage" class="reset-message animate__animated animate__fadeInDown">
+        {{ resetMessage }}
+      </div>
+    </form>
+    </div>
+  </mat-card>
+</div>

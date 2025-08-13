@@ -1,0 +1,42 @@
+<div class="orders-container">
+  <h2>Orders</h2>
+
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Contact</th>
+        <th>Items</th>
+        <th>Order Date</th>
+        <th>Delivery Date</th>
+        <th>Payment</th>
+        <th>Status</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.orderId }}</td>
+        <td>{{ order.customerName }}</td>
+        <td>{{ order.contact }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let item of order.items">
+              {{ item.productName }} (x{{ item.quantity }})
+            </li>
+          </ul>
+        </td>
+        <td>{{ order.orderDate }}</td>
+        <td>{{ order.deliveryDate || '-' }}</td>
+        <td>
+          <span [ngClass]="order.paymentStatus.toLowerCase()">{{ order.paymentStatus }}</span>
+        </td>
+        <td>
+          <span [ngClass]="order.orderStatus.toLowerCase()">{{ order.orderStatus }}</span>
+        </td>
+        <td>₹{{ getTotalAmount(order.items) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

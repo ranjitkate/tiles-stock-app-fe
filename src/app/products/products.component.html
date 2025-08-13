@@ -1,0 +1,43 @@
+<div class="categories-container">
+     <h2>Add Product</h2>
+  <form (ngSubmit)="addProduct()" class="category-form">
+    <input type="text" placeholder="Product Name" [(ngModel)]="newProduct.name" name="productName" required />
+    <select [(ngModel)]="newProduct.category" name="productCategory">
+      <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
+    </select>
+    <input type="number" placeholder="Price" [(ngModel)]="newProduct.price" name="productPrice" />
+    <input type="number" placeholder="Stock" [(ngModel)]="newProduct.stock" name="productStock" />
+    <select [(ngModel)]="newProduct.status" name="productStatus">
+      <option value="Available">Available</option>
+      <option value="Out of Stock">Out of Stock</option>
+    </select>
+    <button type="submit">Add Product</button>
+  </form>
+
+  <h3>All Products</h3>
+  <table class="category-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let j = index">
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ product.status }}</td>
+        <td>
+          <button (click)="editProduct(j)">Edit</button>
+          <button (click)="deleteProduct(j)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
