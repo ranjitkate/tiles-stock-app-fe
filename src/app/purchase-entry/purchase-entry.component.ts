@@ -10,7 +10,7 @@ export class PurchaseEntryComponent {
   purchaseItems: any[] = [];
   dataSource = new MatTableDataSource<any>(this.purchaseItems);
   editingIndex: number | null = null;
-gstEnabled : boolean = false;
+  gstEnabled : boolean = false;
   newItem = {
     category: '',
     product: '',

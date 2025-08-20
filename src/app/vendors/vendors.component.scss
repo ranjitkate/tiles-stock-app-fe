@@ -1,0 +1,21 @@
+.vendor-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.vendor-form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+mat-form-field {
+  flex: 1 1 calc(50% - 15px);
+}
+
+table {
+  width: 100%;
+}

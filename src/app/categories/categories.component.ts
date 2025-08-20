@@ -1,38 +1,69 @@
-import { Component } from '@angular/core';
-
-interface Category {
-  name: string;
-  description: string;
-  status: 'Active' | 'Inactive';
-}
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { CategoryService } from '../service/category.service';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-category',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
+export class CategoriesComponent implements OnInit {
+  categoryForm!: FormGroup;
+  displayedColumns: string[] = ['id', 'name', 'code', 'description', 'status', 'actions'];
+  dataSource = new MatTableDataSource<any>();
+  editMode = false;
+  editCategoryId: number | null = null;
 
-export class CategoriesComponent {
-  categories: Category[] = [
-    { name: 'Wall Tiles', description: 'Tiles suitable for walls', status: 'Active' },
-    { name: 'Floor Tiles', description: 'Durable tiles for flooring', status: 'Inactive' },
-    { name: 'Bathroom Tiles', description: 'Water-resistant bathroom tiles', status: 'Active' },
-  ];
-  newCategory: Category = { name: '', description: '', status: 'Active' };
+  constructor(private fb: FormBuilder, private categoryService: CategoryService) {}
 
-  addCategory() {
-    if (this.newCategory.name.trim()) {
-      this.categories.push({ ...this.newCategory });
-      this.newCategory = { name: '', description: '', status: 'Active' };
+  ngOnInit(): void {
+    this.categoryForm = this.fb.group({
+      name: ['', Validators.required],
+      code: [''],
+      description: [''],
+      status: [true]
+    });
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.categoryService.getAll().subscribe(data => this.dataSource.data = data);
+  }
+
+  onSubmit() {
+    if (this.categoryForm.invalid) return;
+    if (this.editMode) {
+      this.categoryService.update(this.editCategoryId!, this.categoryForm.value).subscribe(() => {
+        this.loadCategories();
+        this.cancelEdit();
+      });
+    } else {
+      this.categoryService.create(this.categoryForm.value).subscribe(() => {
+        this.loadCategories();
+        this.categoryForm.reset({ status: true });
+      });
     }
   }
 
-  deleteCategory(index: number) {
-    this.categories.splice(index, 1);
+  editCategory(category: any) {
+    this.editMode = true;
+    this.editCategoryId = category.id;
+    this.categoryForm.patchValue(category);
   }
 
-  editCategory(index: number) {
-    this.newCategory = { ...this.categories[index] };
-    this.deleteCategory(index);
+  cancelEdit() {
+    this.editMode = false;
+    this.editCategoryId = null;
+    this.categoryForm.reset({ status: true });
+  }
+
+  deleteCategory(id: number) {
+    this.categoryService.delete(id).subscribe(() => this.loadCategories());
+  }
+
+  toggleStatus(category: any) {
+    category.status = !category.status;
+    this.categoryService.update(category.id, category).subscribe();
   }
 }

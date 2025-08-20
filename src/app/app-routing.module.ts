@@ -12,23 +12,31 @@ import { VendorsComponent } from './vendors/vendors.component';
 import { CreateOrderComponent } from './create-order/create-order.component'
 import { PurchaseEntryComponent } from './purchase-entry/purchase-entry.component';
 import { TransactionPdfGeneratorComponent } from './transaction-pdf-generator/transaction-pdf-generator.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: 'home', component: DashboardComponent },
+      { path: 'stock', component: StockComponent },
+      { path: 'orders', component: OrdersComponent },
+      { path: 'categories', component: CategoriesComponent },
+      { path: 'stock', component: StockComponent },
+      { path: 'tiles', component: TitleComponent },
+      { path: 'products', component: ProductsComponent },
+      { path: 'vendors', component: VendorsComponent },
+      { path: 'create-order', component: CreateOrderComponent },
+      { path: 'purchase-entry', component: PurchaseEntryComponent },
+      { path: 'transaction-pdf', component: TransactionPdfGeneratorComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  {path : 'home', component : DashboardComponent},
-  {path : 'stock', component : StockComponent},
-  {path : 'orders', component : OrdersComponent},
-  {path : 'categories', component : CategoriesComponent},
-  {path :'stock', component : StockComponent},
-  {path : 'tiles', component : TitleComponent},
-  {path : 'products', component : ProductsComponent},
-  {path : 'vendors', component : VendorsComponent},
-  {path : 'create-order', component : CreateOrderComponent},
-  {path : 'purchase-entry', component : PurchaseEntryComponent},
-  {path: 'transaction-pdf', component : TransactionPdfGeneratorComponent}
+  { path: 'register', component: RegisterComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

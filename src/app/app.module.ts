@@ -30,8 +30,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TransactionPdfGeneratorComponent } from './transaction-pdf-generator/transaction-pdf-generator.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LayoutComponent } from './layout/layout.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 
@@ -54,7 +57,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProductsComponent,
     CreateOrderComponent,
     PurchaseEntryComponent,
-    TransactionPdfGeneratorComponent
+    TransactionPdfGeneratorComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -67,14 +71,16 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule,
     MatIconModule,
     MatCheckboxModule,
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    HttpClientModule
+    MatSlideToggleModule,
+    HttpClientModule,
+    MatGridListModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

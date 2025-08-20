@@ -1,4 +1,12 @@
-
+.register-container{
+  display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    padding-right: 5%;
+    background: url('/assets/back.jpg') no-repeat center center;
+    background-size: cover;
+}
   .register-card {
     max-width: 400px;
     margin: 40px auto;

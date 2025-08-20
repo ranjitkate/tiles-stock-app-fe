@@ -1,35 +1,35 @@
-<div class="purchase,-form">
-  <h2>Order Entry</h2>
+<div class="purchase-form">
+  <h2>Sell Entry</h2>
 
   <div class="customer-details">
     <div class="row">
       <mat-form-field appearance="fill">
         <mat-label>Customer Name</mat-label>
-        <input matInput placeholder="Customer Name">
+        <input matInput [(ngModel)]="customer_name" placeholder="Customer Name">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Contact Number</mat-label>
-        <input matInput placeholder="Contact">
+        <input matInput [(ngModel)]="customer_phone" placeholder="Contact">
       </mat-form-field>
     </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Address</mat-label>
-      <textarea matInput placeholder="Full Address"></textarea>
+      <textarea matInput [(ngModel)]="customer_Address" placeholder="Full Address"></textarea>
     </mat-form-field>
 
     <div class="row">
       <mat-form-field appearance="fill">
         <mat-label>Order Date</mat-label>
-        <input matInput [matDatepicker]="orderDatePicker">
+        <input matInput [(ngModel)]="order_date" [matDatepicker]="orderDatePicker">
         <mat-datepicker-toggle matSuffix [for]="orderDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #orderDatePicker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Delivery Date</mat-label>
-        <input matInput [matDatepicker]="deliveryDatePicker">
+        <input matInput [(ngModel)]="delivery_date" [matDatepicker]="deliveryDatePicker">
         <mat-datepicker-toggle matSuffix [for]="deliveryDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #deliveryDatePicker></mat-datepicker>
       </mat-form-field>
@@ -45,7 +45,7 @@
     
   </div>
 
-  <h3>Selling Items</h3>
+  <h3>Purchase Items</h3>
   <form class="form-container">
     <div class="row">
       <mat-form-field appearance="fill">
@@ -70,6 +70,11 @@
       <mat-form-field appearance="fill">
         <mat-label>Size</mat-label>
         <input matInput type="text" [(ngModel)]="newItem.size" name="size" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <input matInput type="text" [(ngModel)]="newItem.type" name="type" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -120,9 +125,9 @@
       <td mat-cell *matCellDef="let item"> ₹{{ item.total }} </td>
     </ng-container>
 
-    <ng-container matColumnDef="details">
-      <th mat-header-cell *matHeaderCellDef> Details </th>
-      <td mat-cell *matCellDef="let item"> {{ item.details }} </td>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let item"> {{ item.type }} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
@@ -143,6 +148,9 @@
 
    <div class="summary-row">
     <span><strong>Total Amount:</strong> ₹{{ getTotalAmount() }}</span>
+    <button mat-raised-button color="primary" (click)="saveOrderToDb()">
+  Save Order
+</button>
     <button mat-raised-button color="primary" (click)="printOrder()">Generate Print</button>
   </div>
 </div>

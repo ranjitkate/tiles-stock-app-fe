@@ -3,8 +3,9 @@
     justify-content: flex-end;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to left, #f0f4f7, #ffffff);
     padding-right: 5%;
+    background: url('/assets/back.jpg') no-repeat center center;
+    background-size: cover;
   }
 
   .login-card {

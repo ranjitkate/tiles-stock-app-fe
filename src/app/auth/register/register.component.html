@@ -1,5 +1,5 @@
 <div class="register-container">
-  <mat-card class="register-card">
+  <mat-card class="register-card animated-slide-in">
     <h2 class="title">Create an Account</h2>
 
     <form [formGroup]="registerForm" (ngSubmit)="register()" class="register-form">
@@ -43,7 +43,7 @@
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Confirm Passwor</mat-label>
         <mat-icon matPrefix>🔒</mat-icon>
-        <input matInput type="password" formControlName="Confirm Passwor" placeholder="Choose a strong password">
+        <input matInput type="password" formControlName="confirmPassword" placeholder="Choose a strong password">
          <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">Confirm Password is required</mat-error>
       <mat-error *ngIf="registerForm.hasError('passwordMismatch')">Passwords do not match</mat-error>
       </mat-form-field>

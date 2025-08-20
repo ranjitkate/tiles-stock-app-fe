@@ -1,0 +1,35 @@
+.product-container {
+  padding: 20px;
+}
+
+.product-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  flex: 1 1 calc(25% - 15px);
+  min-width: 200px;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 100%;
+}
+
+.file-name {
+  font-size: 14px;
+  color: gray;
+}
+
+.product-table {
+  overflow-x: auto;
+}
+
+mat-slide-toggle {
+  margin-bottom: 15px;
+}
