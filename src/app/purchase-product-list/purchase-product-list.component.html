@@ -1,0 +1,158 @@
+<div class="purchase-item-container">
+  <h2>Purchase Item List</h2>
+
+  <!-- Table -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+    <!-- Batch ID -->
+    <ng-container matColumnDef="orderId">
+      <th mat-header-cell *matHeaderCellDef>
+        Batch ID
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'orderId')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+    </ng-container>
+
+     <!-- Vendor name -->
+    <ng-container matColumnDef="vendorName">
+      <th mat-header-cell *matHeaderCellDef>
+        Vendor Name
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'vendorName')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.vendorName}} </td>
+    </ng-container>
+
+    <!-- categoryName -->
+    <ng-container matColumnDef="categoryName">
+      <th mat-header-cell *matHeaderCellDef>
+        Category
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'categoryName')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+    </ng-container>
+
+    <!-- Product -->
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef>
+        Product
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'productName')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+    </ng-container>
+
+    <!-- Size -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef>
+        Size
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'size')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+    </ng-container>
+
+    <!-- Weight -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef>
+        Weight
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'weight')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+     <!-- Quantity -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>
+        Qty
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'quantity')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
+
+     <!-- Type -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>
+        Type
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'type')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <!-- Delivery Date -->
+    <ng-container matColumnDef="deliveryDate">
+      <th mat-header-cell *matHeaderCellDef>
+        Purchase Date
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'deliveryDate')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.deliveryDate | date}} </td>
+    </ng-container>
+
+    <!-- Delivery Date -->
+    <ng-container matColumnDef="orderDate">
+      <th mat-header-cell *matHeaderCellDef>
+        Order Date
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'orderDate')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.orderDate | date}} </td>
+    </ng-container>
+
+    <!-- Price -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>
+        Price
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'price')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> ₹{{element.price}} </td>
+    </ng-container>
+
+    <!-- Total -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>
+        Total
+        <div>
+          <input matInput (keyup)="applyColumnFilter($event, 'total')" placeholder="Filter" />
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let element"> ₹{{element.total}} </td>
+    </ng-container>
+
+   
+
+    <!-- Actions --> 
+     <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="generateLabel(element)">
+          <mat-icon>qr_code</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Table Headers & Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Pagination -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

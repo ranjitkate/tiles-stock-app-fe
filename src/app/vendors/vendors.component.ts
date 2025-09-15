@@ -12,6 +12,8 @@ export class VendorsComponent implements OnInit {
   vendorForm!: FormGroup;
   vendors: Vendor[] = [];
   editingVendorId: number | null = null;
+  showTable = true;
+  editMode = false;
 
   constructor(
     private fb: FormBuilder,
@@ -68,5 +70,9 @@ export class VendorsComponent implements OnInit {
         this.loadVendors();
       });
     }
+  }
+
+  cancelEdit() {
+    this.vendorForm.reset();
   }
 }

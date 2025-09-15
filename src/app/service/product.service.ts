@@ -13,6 +13,7 @@ export class ProductService {
   getAll(): Observable<any[]> { return this.http.get<any[]>(this.api); }
   getCategories(): Observable<any[]> { return this.http.get<any[]>(this.catApi); }
   getVendors(): Observable<any[]> { return this.http.get<any[]>(this.venApi); }
+  getSizes(): Observable<any[]> { return this.http.get<any[]>(this.api + '/sizes'); }
 
   save(product: any, imageFile: File | null): Observable<any> {
     const formData = new FormData();

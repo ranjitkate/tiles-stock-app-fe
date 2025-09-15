@@ -34,15 +34,15 @@
         <mat-datepicker #deliveryDatePicker></mat-datepicker>
       </mat-form-field>
     </div>
-    
-   <div class="row"> 
-<mat-checkbox [(ngModel)]="gstEnabled">Include GST Number</mat-checkbox>
-    <mat-form-field appearance="fill" *ngIf="gstEnabled">
-      <mat-label>GST Number</mat-label>
-      <input matInput placeholder="Enter GST Number">
-    </mat-form-field>
-   </div>
-    
+
+    <div class="row">
+      <mat-checkbox [(ngModel)]="gstEnabled">Include GST Number</mat-checkbox>
+      <mat-form-field appearance="fill" *ngIf="gstEnabled">
+        <mat-label>GST Number</mat-label>
+        <input matInput placeholder="Enter GST Number">
+      </mat-form-field>
+    </div>
+
   </div>
 
   <h3>Purchase Items</h3>
@@ -51,14 +51,14 @@
       <mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
         <mat-select [(ngModel)]="newItem.category" name="category">
-          <mat-option *ngFor="let category of categoryList" [value]="category">{{ category }}</mat-option>
+          <mat-option *ngFor="let category of categoryList" [value]="category.id">{{ category.name }}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Product</mat-label>
         <mat-select [(ngModel)]="newItem.product" name="product">
-          <mat-option *ngFor="let product of productList" [value]="product">{{ product }}</mat-option>
+          <mat-option *ngFor="let product of productListMap" [value]="product.id">{{ product.name }}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -69,12 +69,23 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Size</mat-label>
-        <input matInput type="text" [(ngModel)]="newItem.size" name="size" />
+        <mat-select [(ngModel)]="newItem.size" name="product">
+          <mat-option *ngFor="let s of sizeList" [value]="s.size ">{{ s.size }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Weight</mat-label>
+        <mat-select [(ngModel)]="newItem.weight" name="product">
+          <mat-option *ngFor="let w of weight" [value]="w.name ">{{ w.name }}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Type</mat-label>
-        <input matInput type="text" [(ngModel)]="newItem.type" name="type" />
+        <mat-select [(ngModel)]="newItem.type" name="product">
+          <mat-option *ngFor="let w of typeList" [value]="w.name ">{{ w.name }}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -94,20 +105,20 @@
     </div>
   </form>
 
-   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef> Category </th>
-      <td mat-cell *matCellDef="let item"> {{ item.category }} </td>
+      <td mat-cell *matCellDef="let item"> {{ item.categoryName }} </td>
     </ng-container>
 
     <ng-container matColumnDef="product">
       <th mat-header-cell *matHeaderCellDef> Product </th>
-      <td mat-cell *matCellDef="let item"> {{ item.product }} </td>
+      <td mat-cell *matCellDef="let item"> {{ item.productName  }} </td>
     </ng-container>
 
     <ng-container matColumnDef="size">
       <th mat-header-cell *matHeaderCellDef> Size </th>
-      <td mat-cell *matCellDef="let item"> {{ item.size }} </td>
+      <td mat-cell *matCellDef="let item"> {{ item.sizeName  }} </td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
@@ -139,6 +150,9 @@
         <button mat-icon-button color="warn" (click)="deleteItem(i)">
           <mat-icon>delete</mat-icon>
         </button>
+        <button mat-icon-button color="warn" (click)="labelInvoice(i)">
+         <mat-icon>qr_code</mat-icon>
+        </button>
       </td>
     </ng-container>
 
@@ -146,11 +160,12 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-   <div class="summary-row">
+  <div class="summary-row">
     <span><strong>Total Amount:</strong> ₹{{ getTotalAmount() }}</span>
     <button mat-raised-button color="primary" (click)="saveOrderToDb()">
-  Save Order
-</button>
+      Save Order
+    </button>
     <button mat-raised-button color="primary" (click)="printOrder()">Generate Print</button>
+    <!-- <button mat-raised-button color="primary" (click)="labelInvoice()">Generate Invoice</button> -->
   </div>
 </div>

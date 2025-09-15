@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductService } from '../service/product.service';
+import { SizeService } from '../service/size.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -15,21 +16,18 @@ export class ProductsComponent implements OnInit {
   displayedColumns: string[] = [
     'productCode','name','size','price','stockQuantity','category','vendorId','status','image','actions'
   ];
-
   categories: any[] = [];
   vendors: any[] = [];
-
+  sizes: any[] = [];
   editMode = false;
   editId: number | null = null;
   showTable = true;
   selectedFile: File | null = null;
-
-
   selectedImageFile: File | null = null;
   imagePreview: string | null = null;
 
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private productService: ProductService, private http: HttpClient, private sizeService: SizeService) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -51,6 +49,7 @@ export class ProductsComponent implements OnInit {
   loadLookups() {
     this.productService.getCategories().subscribe(d => this.categories = d || []);
     this.productService.getVendors().subscribe(d => this.vendors = d || []);
+    this.sizeService.getAll().subscribe(d => this.sizes = d || []);
   }
 
   loadProducts() {
@@ -124,7 +123,5 @@ export class ProductsComponent implements OnInit {
   }
 
   asImageSrc(base64: string) { return `data:image/*;base64,${base64}`; }
-
-
 
 }

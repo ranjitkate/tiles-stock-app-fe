@@ -35,6 +35,12 @@ import { TransactionPdfGeneratorComponent } from './transaction-pdf-generator/tr
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponent } from './layout/layout.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SubcategoryComponent } from './subcategory/subcategory.component';
+import { SizeComponent } from './size/size.component';
+import { SellProductListComponent } from './sell-product-list/sell-product-list.component';
+import { PurchaseProductListComponent } from './purchase-product-list/purchase-product-list.component';
+
 
 
 
@@ -58,7 +64,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
     CreateOrderComponent,
     PurchaseEntryComponent,
     TransactionPdfGeneratorComponent,
-    LayoutComponent
+    LayoutComponent,
+    SubcategoryComponent,
+    SizeComponent,
+    SellProductListComponent,
+    PurchaseProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +90,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSlideToggleModule,
     HttpClientModule,
     MatGridListModule,
+    MatPaginatorModule
     
   ],
   providers: [],

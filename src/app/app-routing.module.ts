@@ -13,6 +13,10 @@ import { CreateOrderComponent } from './create-order/create-order.component'
 import { PurchaseEntryComponent } from './purchase-entry/purchase-entry.component';
 import { TransactionPdfGeneratorComponent } from './transaction-pdf-generator/transaction-pdf-generator.component';
 import { LayoutComponent } from './layout/layout.component';
+import { SubcategoryComponent } from './subcategory/subcategory.component';
+import { SizeComponent } from './size/size.component';
+import { SellProductListComponent } from './sell-product-list/sell-product-list.component';
+import { PurchaseProductListComponent } from './purchase-product-list/purchase-product-list.component';
 
 const routes: Routes = [
   {
@@ -23,6 +27,8 @@ const routes: Routes = [
       { path: 'stock', component: StockComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'categories', component: CategoriesComponent },
+      {path : 'subcategories', component : SubcategoryComponent},
+      {path : 'size', component : SizeComponent},
       { path: 'stock', component: StockComponent },
       { path: 'tiles', component: TitleComponent },
       { path: 'products', component: ProductsComponent },
@@ -30,6 +36,8 @@ const routes: Routes = [
       { path: 'create-order', component: CreateOrderComponent },
       { path: 'purchase-entry', component: PurchaseEntryComponent },
       { path: 'transaction-pdf', component: TransactionPdfGeneratorComponent },
+      {path : 'sell-product-list', component : SellProductListComponent},
+      {path : 'purchase-product-list',component : PurchaseProductListComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },

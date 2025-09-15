@@ -1,0 +1,48 @@
+
+
+<h2>Manage Subcategories</h2>
+
+<form (ngSubmit)="addSubCategory()" style="margin-bottom: 20px;">
+  <mat-form-field appearance="fill">
+    <mat-label>Subcategory Name</mat-label>
+    <input matInput [(ngModel)]="newSubCategory.name" name="name" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="newSubCategory.categoryId" name="categoryId" required>
+      <mat-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Add</button>
+</form>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width-table">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Subcategory</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef>Category</th>
+    <td mat-cell *matCellDef="let element">{{ element.category?.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="deleteSubCategory(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteSubCategory(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

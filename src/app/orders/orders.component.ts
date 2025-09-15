@@ -1,20 +1,18 @@
-import { Component } from '@angular/core';
-interface OrderItem {
-  productName: string;
-  quantity: number;
-  price: number;
-}
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
-interface Order {
+export interface SellOrder {
   orderId: string;
-  customerName: string;
+  customer: string;
   contact: string;
-  orderDate: string;
-  deliveryDate?: string;
-  paymentStatus: 'Pending' | 'Paid';
-  orderStatus: 'Pending' | 'Shipped' | 'Delivered' | 'Cancelled';
-  items: OrderItem[];
-  remarks?: string;
+  items: { product: string; qty: number }[];
+  orderDate: Date;
+  deliveryDate: Date;
+  payment: string;
+  status: string;
+  total: number;
 }
 
 @Component({
@@ -24,35 +22,53 @@ interface Order {
 })
 
 export class OrdersComponent {
-  orders: Order[] = [
-    {
-      orderId: 'ORD001',
-      customerName: 'Rahul Sharma',
-      contact: 'rahul@example.com',
-      orderDate: '2025-07-25',
-      deliveryDate: '2025-07-30',
-      paymentStatus: 'Paid',
-      orderStatus: 'Delivered',
-      items: [
-        { productName: 'Glossy White Tile', quantity: 50, price: 40 },
-        { productName: 'Rustic Brown Tile', quantity: 20, price: 55 }
-      ],
-      remarks: 'Handle with care'
-    },
-    {
-      orderId: 'ORD002',
-      customerName: 'Priya Mehta',
-      contact: 'priya@example.com',
-      orderDate: '2025-07-28',
-      paymentStatus: 'Pending',
-      orderStatus: 'Pending',
-      items: [
-        { productName: 'Matte Grey Tile', quantity: 30, price: 48 }
-      ]
-    }
+  displayedColumns: string[] = [
+    'orderId', 'customer', 'contact', 'items', 
+    'orderDate', 'deliveryDate', 'payment', 'status', 'total'
   ];
 
-  getTotalAmount(items: OrderItem[]): number {
-    return items.reduce((total, item) => total + (item.quantity * item.price), 0);
+  dataSource = new MatTableDataSource<SellOrder>([]);
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
+
+  ngOnInit(): void {
+    // Dummy Data (replace with API call)
+    this.dataSource.data = [
+      {
+        orderId: 'SO-1001',
+        customer: 'Rahul Sharma',
+        contact: '9876543210',
+        items: [{ product: 'Tile A', qty: 10 }, { product: 'Tile B', qty: 5 }],
+        orderDate: new Date(),
+        deliveryDate: new Date(new Date().setDate(new Date().getDate() + 5)),
+        payment: 'Paid',
+        status: 'Delivered',
+        total: 15000
+      },
+      {
+        orderId: 'SO-1002',
+        customer: 'Priya Singh',
+        contact: '9123456780',
+        items: [{ product: 'Tile C', qty: 20 }],
+        orderDate: new Date(),
+        deliveryDate: new Date(new Date().setDate(new Date().getDate() + 7)),
+        payment: 'Pending',
+        status: 'Processing',
+        total: 20000
+      }
+    ];
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

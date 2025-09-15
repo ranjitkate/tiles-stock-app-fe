@@ -11,6 +11,13 @@
   <!-- Product Form -->
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="product-form mat-elevation-z2">
     <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category" name="category" required>
+      <mat-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+    <mat-form-field appearance="fill">
       <mat-label>Product Code</mat-label>
       <input matInput formControlName="code" />
       <mat-error *ngIf="productForm.get('code')?.hasError('required')">Required</mat-error>
@@ -23,14 +30,17 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="wide">
-      <mat-label>Description</mat-label>
+      <mat-label>Weight</mat-label>
       <textarea matInput formControlName="description" rows="2"></textarea>
     </mat-form-field>
 
+
     <mat-form-field appearance="fill">
-      <mat-label>Size</mat-label>
-      <input matInput formControlName="size" placeholder="e.g. 600x600 mm" />
-    </mat-form-field>
+    <mat-label>Size</mat-label>
+    <mat-select formControlName="size" name="size" required>
+      <mat-option *ngFor="let size of sizes" [value]="size.size">{{ size.size }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Price</mat-label>
@@ -44,20 +54,13 @@
       <mat-error *ngIf="productForm.get('stockQuantity')?.hasError('required')">Required</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Category</mat-label>
-      <mat-select formControlName="category">
-        <mat-option value="">Select Category</mat-option>
-        <mat-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="productForm.get('category')?.hasError('required')">Required</mat-error>
-    </mat-form-field>
+   
 
     <mat-form-field appearance="fill">
       <mat-label>Vendor</mat-label>
       <mat-select formControlName="vendorId">
         <mat-option value="">Select Vendor</mat-option>
-        <mat-option *ngFor="let v of vendors" [value]="v.id">{{ v.id }}</mat-option>
+        <mat-option *ngFor="let v of vendors" [value]="v.id">{{ v.name }}</mat-option>
       </mat-select>
       <mat-error *ngIf="productForm.get('vendorId')?.hasError('required')">Required</mat-error>
     </mat-form-field>

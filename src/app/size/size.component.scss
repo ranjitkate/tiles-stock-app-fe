@@ -2,6 +2,13 @@
   padding: 1rem;
 }
 
+h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #3f51b5; // Material Indigo
+}
+
 .controls {
   display: flex;
   justify-content: flex-end;
@@ -10,7 +17,7 @@
 
 .product-form {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
   gap: 12px;
   padding: 16px;
   border-radius: 12px;
