@@ -8,4 +8,13 @@ import { Component, Input } from '@angular/core';
 
 export class SidebarComponent {
   @Input() isOpen = false;
+  submenuOpen = false;
+
+  toggleSidebar() {
+    this.isOpen = !this.isOpen;
+  }
+
+  toggleSubmenu() {
+    this.submenuOpen = !this.submenuOpen;
+  }
 }

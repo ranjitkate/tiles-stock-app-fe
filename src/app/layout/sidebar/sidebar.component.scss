@@ -35,6 +35,24 @@
   background-color: #455a64;
 }
 
+.has-submenu > a {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.submenu {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.submenu li a {
+  font-size: 14px;
+  color: #666;
+}
+
+
 @media (min-width: 769px) {
   .app-sidebar {
     left: 0;

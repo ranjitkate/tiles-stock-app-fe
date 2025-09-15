@@ -5,11 +5,19 @@
     <li><a routerLink="/subcategories">📁 SubCategories</a></li>
     <li><a routerLink="/size">📁 Size</a></li>
     <li><a routerLink="/products">🧱 Products</a></li>    
-    <li><a routerLink="/stock">📦 Stock</a></li>
     <li><a routerLink="/vendors">🏪 Vendors</a></li>
     <li><a routerLink="/orders">🛒 Orders</a></li>
     <li><a routerLink="/create-order">🛒 Create Orders</a></li>
     <li><a routerLink="/purchase-entry">🛒 Purchase Orders</a></li>
+     <!-- Parent Menu with Submenu -->
+    <li class="has-submenu">
+      <a (click)="toggleSubmenu()">📑 Reports ▾</a>
+      <ul class="submenu" *ngIf="submenuOpen">
+        <li><a routerLink="/stock">📋 Stock Report</a></li>
+        <li><a routerLink="/purchase-product-list">📋 Purchase List</a></li>
+        <li><a routerLink="/sell-product-list">📋 Order List</a></li>
+      </ul>
+    </li>
     
   </ul>
 </aside>
